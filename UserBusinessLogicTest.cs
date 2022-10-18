@@ -23,5 +23,22 @@ namespace SD_125_W22SD_UnitTest
 
             Assert.AreEqual(user.Id, result.Id);
         }
+
+        [TestMethod]
+        public async Task ShouldReturnNullWhenNoMatchingIdPassed()
+        {
+            var user = new ApplicationUser
+            {
+                UserName = "User1",
+                Id = "UserId1",
+                Email = "user1@jello.com"
+            };
+            var userManager = FakeUserManager.GetFakeUserManager(new List<ApplicationUser> { user });
+            var userBusinessLogic = new UserBusinessLogic(userManager);
+
+            var result = await userBusinessLogic.FindById("UserId2");
+
+            Assert.IsNull(result);
+        }
     }
 }
