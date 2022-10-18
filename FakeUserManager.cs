@@ -27,6 +27,7 @@ namespace SD_125_W22SD_UnitTest
             fakeUserManager.Setup(x => x.Users).Returns(users.AsQueryable());
             fakeUserManager.Setup(x => x.CreateAsync(It.IsAny<ApplicationUser>(), It.IsAny<string>())).ReturnsAsync(IdentityResult.Success);
             fakeUserManager.Setup(x => x.FindByIdAsync(It.IsAny<string>())).ReturnsAsync((string id) => users.Find(u => u.Id == id));
+            fakeUserManager.Setup(x => x.FindByNameAsync(It.IsAny<string>())).ReturnsAsync((string name) => users.Find(u => u.UserName == name));
             fakeUserManager.Setup(x => x.UpdateAsync(It.IsAny<ApplicationUser>())).ReturnsAsync(IdentityResult.Success);
             fakeUserManager.Setup(x => x.DeleteAsync(It.IsAny<ApplicationUser>())).ReturnsAsync(IdentityResult.Success);
             fakeUserManager.Setup(x => x.ChangeEmailAsync(It.IsAny<ApplicationUser>(), It.IsAny<string>(), It.IsAny<string>())).ReturnsAsync(IdentityResult.Success);
